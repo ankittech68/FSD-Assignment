@@ -13,16 +13,13 @@ type Dashboard = {
   activity: Array<{ _id: string; action: string; createdAt: string; actor?: { name: string } }>;
 };
 export default function DashboardPage() {
-  const [renderVersion, setRenderVersion] = useState(0);
   const { data, isLoading } = useQuery({
     queryKey: ['dashboard'],
     queryFn: () => api<Dashboard>('/dashboard'),
     staleTime: Infinity,
   });
-  useEffect(() => {
-    setRenderVersion(renderVersion + 1);
-  }, [renderVersion]);
   if (isLoading) return <p className="text-sm text-slate-500">Loading your work…</p>;
+  const visibleAssignedTasks = (data?.assignedTasks ?? []).filter((task) => task.status !== 'done');
   const stats = [
     { label: 'Active projects', value: data?.statistics.projects ?? 0, icon: FolderKanban },
     { label: 'Assigned to you', value: data?.statistics.assignedTasks ?? 0, icon: ListTodo },
@@ -44,7 +41,7 @@ export default function DashboardPage() {
           </Card>
         ))}
       </section>
-      <section className="grid gap-6 lg:grid-cols-2">
+      <section className="grid items-start gap-6 lg:grid-cols-2">
         <Card className="p-5">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="font-semibold">My projects</h2>
@@ -73,14 +70,20 @@ export default function DashboardPage() {
         <Card className="p-5">
           <h2 className="mb-4 font-semibold">Assigned tasks</h2>
           <div className="space-y-2">
-            {data?.assignedTasks.map((task) => (
-              <div key={task._id} className="rounded-lg bg-muted p-3">
-                <p className="font-medium">{task.title}</p>
-                <p className="mt-1 text-xs uppercase tracking-wide text-slate-500">
-                  {task.status.replace('_', ' ')} · {task.priority}
-                </p>
-              </div>
-            )) ?? <p className="text-sm text-slate-500">Nothing assigned to you right now.</p>}
+            {visibleAssignedTasks.length > 0 ? (
+              visibleAssignedTasks.map((task) => (
+                <div key={task._id} className="rounded-lg bg-muted p-3">
+                  <p className="font-medium">
+                    {task.project?.name ?? 'Project'} · {task.title}
+                  </p>
+                  <p className="mt-1 text-xs uppercase tracking-wide text-slate-500">
+                    {task.status.replace('_', ' ')} · {task.priority}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-slate-500">Nothing assigned to you right now.</p>
+            )}
           </div>
         </Card>
       </section>

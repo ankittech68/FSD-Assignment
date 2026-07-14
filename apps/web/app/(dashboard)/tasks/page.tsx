@@ -7,7 +7,9 @@ export default function TasksPage() {
   const { data = [] } = useQuery({
     queryKey: ['my-tasks'],
     queryFn: () =>
-      api<{ assignedTasks: Task[] }>('/dashboard').then((dashboard) => dashboard.assignedTasks),
+      api<{ assignedTasks: Task[] }>('/dashboard').then((dashboard) =>
+        dashboard.assignedTasks.filter((task) => task.status !== 'done'),
+      ),
   });
   return (
     <div>
@@ -17,12 +19,14 @@ export default function TasksPage() {
         {data.map((task) => (
           <Card key={task._id} className="flex items-center justify-between p-4">
             <div>
-              <p className="font-medium">{task.title}</p>
+              <p className="font-medium">
+                {task.project?.name ?? 'Project'} · {task.title}
+              </p>
               <p className="mt-1 text-xs uppercase tracking-wide text-slate-500">
                 {task.status.replace('_', ' ')} · {task.priority}
               </p>
             </div>
-            <span className="rounded bg-muted px-2 py-1 text-xs">{task.project?.key}</span>
+            <span className="rounded bg-muted px-2 py-1 text-xs">{task.project?.key ?? '—'}</span>
           </Card>
         ))}
         {data.length === 0 && <p className="text-sm text-slate-500">Your task list is clear.</p>}

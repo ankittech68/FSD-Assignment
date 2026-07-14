@@ -4,7 +4,7 @@ import { TaskModel } from '../models/task.js';
 import { ActivityLogModel } from '../models/activity-log.js';
 import { respond } from '../utils/api.js';
 export const dashboard = async (req: Request, res: Response) => {
-  const userId = req.user!.id;
+  const userId = String(req.user!.id);
   const projects = await ProjectModel.find({
     $or: [{ owner: userId }, { members: userId }],
     archivedAt: null,

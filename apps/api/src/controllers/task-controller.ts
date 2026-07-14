@@ -29,7 +29,12 @@ export const createTask = async (req: Request, res: Response) => {
   if (!(await availableProject(projectId, req.user!.id)))
     return respond(res, 404, 'Project not found');
   const values = taskSchema.parse(req.body);
-  const task = await TaskModel.create({ ...values, project: projectId, createdBy: req.user!.id });
+  const task = await TaskModel.create({
+    ...values,
+    project: projectId,
+    createdBy: req.user!.id,
+    assignee: values.assignee ?? req.user!.id,
+  });
   await recordActivity(req.user!.id, 'task.created', { project: projectId, task: task.id });
   if (task.assignee && task.assignee.toString() !== req.user!.id)
     await notify(
