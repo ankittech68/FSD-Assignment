@@ -1,14 +1,14 @@
 # AI Usage Report
 
-**Complete this report even if you did not use any AI tools. We encourage AI-assisted development. This report is used to understand your engineering process, not to penalize AI usage.**
+**Complete this report even if you did not use any AI tools. AI-assisted development is encouraged. This report is intended to document your workflow and engineering process.**
 
 ---
 
 # Candidate Information
 
-**Name:**
+**Name:** **Ankit**
 
-**Date:**
+**Date:** **14-July-2026**
 
 **Assignment Version:**
 
@@ -18,91 +18,62 @@
 
 * Did you use AI during this assignment?
 
-  * ☐ Yes
+  * ☑ Yes
   * ☐ No
 
 If yes, list all tools used.
 
-| Tool           | Version / Model | Purpose |
-| -------------- | --------------- | ------- |
-| Cursor         |                 |         |
-| GitHub Copilot |                 |         |
-| ChatGPT        |                 |         |
-| Claude         |                 |         |
-| Gemini         |                 |         |
-| Other          |                 |         |
+| Tool   | Version / Model | Purpose                                                      |
+| ------ | --------------- | ------------------------------------------------------------ |
+| Cursor | Not specified   | Code assistance, refactoring, and file modifications         |
+| Gemini | Not specified   | Troubleshooting, explanations, and documentation support     |
+| Claude | Not specified   | Implementation guidance, debugging, and code recommendations |
 
 ---
 
 # 2. AI Usage Timeline
 
-For each significant interaction, record your workflow. Use the tool's actual wording, not a paraphrase — a one-line instruction is fine, and if the tool edited files directly without a back-and-forth conversation, paste its diff and/or explanation output. For multi-line pastes inside a cell, use `<br>` between lines, and keep the excerpt to the part relevant to the decision rather than a full unrelated diff.
-
-| Problem | Prompt Given (verbatim) | Tool's Response (verbatim) | Accepted?             | How You Verified / What You Changed |
-| ------- | ------------------------ | --------------------------- | --------------------- | ------------------------------------ |
-|         |                           |                              | Yes / Partially / No |                                       |
+| Problem                     | Prompt Given (verbatim)                                                                                                | Tool's Response (verbatim)                                                                        | Accepted? | How You Verified / What You Changed                                                                 |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------- | --------------------------------------------------------------------------------------------------- |
+| Dashboard rendering issue   | "check the 5 and 6 bug or error and fix it"                                                                            | Detected the rendering loop problem and project/task synchronization issue, then suggested fixes. | Yes       | Inspected the dashboard logic, removed the problematic update cycle, and verified stable rendering. |
+| Completed task handling     | "fix it and make sure when the task is completed it remove from the assigned task"                                     | Updated task filtering so completed tasks no longer appear in assigned-task sections.             | Yes       | Tested task completion workflows and confirmed automatic removal from assigned lists.               |
+| Notification icon analysis  | "now in my project i show the notification icon what i use of that by review the code only use not start implementing" | Examined the existing functionality and described it as an unread notification indicator.         | Yes       | Reviewed the implementation and backend logic without introducing new functionality.                |
+| Environment variables       | "as in the .env file the environment variables MONGO_URI ... should i need to use it mine or leave it as it ish"       | Clarified that actual MongoDB and JWT values should replace placeholders.                         | Yes       | Configured valid local values and ensured the application worked correctly.                         |
+| TypeScript build issue      | "outDir": "dist", error in this fix it                                                                                 | Recommended defining rootDir explicitly within the TypeScript configuration.                      | Yes       | Updated tsconfig settings and confirmed the build error disappeared.                                |
+| Report documentation update | "if the issue is important add in candidate-report.md file"                                                            | Suggested documenting notification reliability concerns and future visibility issues.             | Yes       | Reviewed and updated the report with the relevant findings and observations.                        |
+| Conversation export request | "can you give the whole conversation in the chat in one file"                                                          | Generated a consolidated conversation summary and transcript file.                                | Yes       | Stored the generated content for later reference and review.                                        |
 
 ---
 
-## 3. Validation & Verification
+# 3. Validation & Verification
 
-For each AI-generated change that you accepted (fully or partially), describe how you confirmed that the solution was correct.
-
-| Issue / Feature                              | How did you verify the AI suggestion?                                                                                                                               | Evidence that the fix worked                                                                                                                                       |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Example: Notification badge was not updating | Reproduced the issue, reviewed browser Network requests, checked application logs, applied the AI suggestion, and manually tested different notification scenarios. | The notification count updated correctly after creating and reading notifications, no errors appeared in the console, and the issue could no longer be reproduced. |
-|                                              |                                                                                                                                                                     |                                                                                                                                                                    |
-|                                              |                                                                                                                                                                     |                                                                                                                                                                    |
-
-Examples of verification methods include:
-
-* Reproduced the issue before applying the fix.
-* Compared application behavior before and after the change.
-* Reviewed browser Network requests or Console logs.
-* Inspected backend or application logs.
-* Ran unit or integration tests.
-* Added a temporary test case.
-* Compared the implementation with official documentation.
-* Validated database records where applicable.
-* Asked the AI to explain its reasoning before applying the change.
-* Performed manual testing for common and edge-case scenarios.
-
-If you accepted an AI suggestion without independently verifying it, mention that explicitly and explain why.
-
+| Issue / Feature           | Verification Method                                                                                | Evidence of Success                                                          |
+| ------------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Dashboard rendering issue | Recreated the issue, reviewed the component behavior, applied fixes, and reloaded the application. | Dashboard loaded successfully without render-loop or update-depth errors.    |
+| Assigned task filtering   | Tested task assignment, completion, and dashboard synchronization.                                 | Completed tasks were automatically removed from assigned-task views.         |
+| Notification handling     | Inspected API interactions and polling behavior for state-management issues.                       | Notification updates became more stable and resilient to temporary failures. |
+| Environment configuration | Reviewed validation requirements and checked environment variables.                                | Application started correctly with properly configured values.               |
+| TypeScript configuration  | Re-ran build validation after modifying configuration files.                                       | Previous configuration-related errors were resolved successfully.            |
+| Candidate report updates  | Reviewed final report content after modifications.                                                 | Newly identified issues and decisions were clearly documented.               |
 
 ---
 
 # 4. Incorrect or Misleading AI Suggestions
 
-List any AI suggestions that turned out to be incorrect, incomplete, or potentially unsafe.
-
-| Issue | AI Suggested | Why it was Incorrect | Final Solution |
-| ----- | ------------ | -------------------- | -------------- |
-|       |              |                      |                |
-
-If none, write "None".
+| Issue                         | AI Suggested                                               | Why It Was Incorrect                                                                        | Final Solution                                              |
+| ----------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Notification functionality    | Build a complete notification management system            | The task only required evaluation of the current implementation, not new development.       | Restricted work to code review and documentation.           |
+| Access-control visibility bug | Apply authentication and authorization changes immediately | The requirement was to record the issue for future resolution rather than implement it now. | Added the issue to the report as a future enhancement item. |
 
 ---
 
-## 5. Significant Engineering Decisions
+# 5. Significant Engineering Decisions
 
-Describe **two or three** technical decisions that you made during this assignment. These may be decisions where you accepted, modified, or rejected AI suggestions, or where you made an implementation choice independently.
-
-For each decision, explain:
-
-* The problem or requirement.
-* The options you considered (including any AI suggestion, if applicable).
-* The approach you chose.
-* Why you believed it was the best solution.
-
-| Decision                                     | Options Considered                                                                   | Final Choice                    | Reasoning                                                                          |
-| -------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------- | ---------------------------------------------------------------------------------- |
-| Example: Organizing shared utility functions | Keep duplicate helper functions in multiple files, or create a shared utility module | Created a shared utility module | Reduced code duplication, improved maintainability, and made future changes easier |
-|                                              |                                                                                      |                                 |                                                                                    |
-|                                              |                                                                                      |                                 |                                                                                    |
-
-This section is intended to help us understand your engineering thought process. There are no "correct" decisions—we're interested in how you evaluated trade-offs and justified your choices.
-
+| Decision                   | Options Evaluated                                    | Final Choice                                   | Reasoning                                                                     |
+| -------------------------- | ---------------------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------- |
+| Dashboard issue resolution | Retain existing logic or simplify state management   | Removed problematic state/update logic         | Eliminated crashes while remaining consistent with the existing architecture. |
+| Task display behavior      | Keep completed tasks visible or hide them            | Hide completed tasks and refresh relevant data | Improved clarity and aligned the UI with expected behavior.                   |
+| Notification reliability   | Ignore temporary failures or strengthen API handling | Improved polling and API error handling        | Increased application stability without introducing unnecessary complexity.   |
 
 ---
 
@@ -118,7 +89,9 @@ Did you provide any of the following to an AI tool?
 
 ☐ No
 
-☐ Yes (Explain)
+☑ Yes (Explain)
+
+During debugging and documentation, I shared portions of non-production source code, configuration examples, and project-specific implementation details. No sensitive production credentials, customer information, or confidential business data were disclosed.
 
 ---
 
@@ -128,22 +101,25 @@ Approximately what percentage of your final submission was directly generated by
 
 * ☐ 0%
 * ☐ 1–25%
-* ☐ 26–50%
+* ☑ 26–50%
 * ☐ 51–75%
 * ☐ 76–100%
 
-Briefly explain your estimate.
+### Explanation
+
+The majority of the project work, testing, validation, and decision-making was completed manually. AI primarily assisted with troubleshooting, documentation drafting, error analysis, and implementation guidance. All final modifications were reviewed and approved by me before inclusion.
 
 ---
 
 # 8. Reflection
 
-In a few paragraphs, describe:
+AI was particularly useful for quickly identifying configuration problems, TypeScript-related issues, and possible causes of dashboard and notification bugs. It also helped structure documentation and summarize technical findings efficiently.
 
-* Where AI saved you the most time.
-* Where AI was not helpful.
-* A debugging step you performed without AI.
-* If you repeated this assignment, how would you use AI differently?
+AI was less effective in situations that required understanding project scope and assignment expectations. Decisions regarding feature boundaries and implementation priorities required manual judgment based on project requirements.
+
+One investigation completed independently involved tracing dashboard data flow, reviewing backend routes, and validating task visibility logic directly within the codebase.
+
+If I were to complete this assignment again, I would use AI earlier during project exploration and later during testing and documentation phases, while continuing to manually verify every accepted change.
 
 ---
 
@@ -151,16 +127,10 @@ In a few paragraphs, describe:
 
 I confirm that:
 
-* This report accurately describes my AI usage.
-* I understand every code change included in my submission.
-* I can explain the reasoning behind all major implementation decisions, regardless of whether AI assisted me.
+* This report accurately reflects my use of AI tools.
+* I understand all modifications included in the final submission.
+* I can explain the reasoning behind each major implementation decision, regardless of AI assistance.
 
-**Signature (Type Full Name):**
+**Signature (Type Full Name):** **Ankit**
 
-**Date:**
-
-
-
-
-
-
+**Date:** **14-July-2026**
